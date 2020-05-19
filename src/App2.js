@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import { BrowserRouter, Route, Link} from 'react-router-dom';
 
 // Componentes
 import tareas from './ejemplos/tareas.json';
@@ -72,14 +73,29 @@ chekearDone = (id) => {
 
   render(){
 
-
+//-----------------------------ENRUTADORES----------------------------------------------------
     return <div>
 
-      <TareasForm addTarea = {this.addTarea}/>
-      <Tareas2  datos2 = {this.state.tareas} 
-                borrarTarea = {this.borrarTarea}
-                checkearDone = {this.chekearDone}/>
-      <Post/>
+      <BrowserRouter> 
+
+          <Link to = "/"> Home </Link>
+          <br/>
+          <Link to = "/Posts"> Posts </Link>
+
+          <Route exact path = "/" render = {() => {
+
+              return <div>
+                    <TareasForm addTarea = {this.addTarea}/>
+                    <Tareas2  datos2 = {this.state.tareas} 
+                        borrarTarea = {this.borrarTarea}
+                        checkearDone = {this.chekearDone}/>
+                </div>
+            }}>
+
+          </Route>
+          <Route path = '/Posts' component = {Post}></Route>
+      </BrowserRouter>
+    
 
     </div>
   }
